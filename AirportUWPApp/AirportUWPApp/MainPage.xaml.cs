@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using AirportUWPApp.Models;
+using AirportUWPApp.ViewModels;
+using AirportUWPApp.Views;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -30,42 +32,43 @@ namespace AirportUWPApp
 
 		private void GoToPilots_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(PilotVM));
+			
 		}
 
 		private void GoToDepartures_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(DepartureVM));
 		}
 
 		private void GoToTickets_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(TicketVM));
 		}
 
 		private void GoToFlights_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(FlightVM));
 		}
 
 		private void GoToTypes_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(PlaneTypeView));
 		}
 
 		private void GoToPlanes_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(PlaneVM));
 		}
 
 		private void GoToCrews_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(CrewVM));
 		}
 
 		private void GoToStewardesses_Click(object sender, RoutedEventArgs e)
 		{
-			throw new NotImplementedException();
+			MainFrame.Navigate(typeof(StewardessVM));
 		}
 		
 	}

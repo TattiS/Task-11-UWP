@@ -8,5 +8,6 @@ namespace AirportUWPApp.ViewModels
 {
 	public class PlaneVM: BaseVM
 	{
+
 	}
 }

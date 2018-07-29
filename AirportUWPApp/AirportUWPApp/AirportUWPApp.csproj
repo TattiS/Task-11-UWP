@@ -124,8 +124,8 @@
     <Compile Include="ViewModels\PlaneVM.cs" />
     <Compile Include="ViewModels\StewardessVM.cs" />
     <Compile Include="ViewModels\TicketVM.cs" />
-    <Compile Include="Views\PlaneTypesView.xaml.cs">
-      <DependentUpon>PlaneTypesView.xaml</DependentUpon>
+    <Compile Include="Views\PlaneTypeView.xaml.cs">
+      <DependentUpon>PlaneTypeView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -153,7 +153,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\PlaneTypesView.xaml">
+    <Page Include="Views\PlaneTypeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

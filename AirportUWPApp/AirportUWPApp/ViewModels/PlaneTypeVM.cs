@@ -12,31 +12,44 @@ namespace AirportUWPApp.ViewModels
 	public class PlaneTypeVM:BaseVM
 	{
 		private readonly PlaneTypeService service;
+		public ObservableCollection<PlaneType> Types;
 		
 		public PlaneTypeVM()
 		{
 			service = new PlaneTypeService();
 			Types = new ObservableCollection<PlaneType>();
-			Type = new PlaneType();
 			ListInit();
 		}
-
-		public ObservableCollection<PlaneType> Types {get; set;}
 		public PlaneType Type { get; set; }
-
+		
 		public async void ListInit()
 		{
 			var collection = await service.GetPlaneTypesAsync();
 			foreach (var item in collection)
 			{
 				Types.Add(item);
+				
 			}
+			Type = new PlaneType() { Id = Types.Count };
+			NotifyPropertyChanged(() => Type);
 		}
 
-		public async Task Set()
+		public async Task AddNew(PlaneType type)
 		{
-			PlaneType t = new PlaneType {Id=2, Model = "ASDFGHLKJLK", Seats=55, AirLift=1212121};
-			await service.DeletePlaneTypeAsync(4);
+			if(type is PlaneType)
+			await service.CreatePlaneTypeAsync(type);
+		}
+
+		public async Task Update(PlaneType type)
+		{
+			if(type is PlaneType)
+			await service.UpdatePlaneTypeAsync(type);
+		}
+
+		public async Task Delete(int id)
+		{
+			if(id > 0)
+			await service.DeletePlaneTypeAsync(id);
 		}
 	}
 }

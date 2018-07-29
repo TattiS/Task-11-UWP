@@ -34,15 +34,14 @@ namespace AirportUWPApp.Services
 
 			return type;
 		}
-		public async Task<IEnumerable<PlaneType>> GetPlaneTypesAsync()
+		public async Task<PlaneType[]> GetPlaneTypesAsync()
 		{
-			IEnumerable<PlaneType> types = null;
+			PlaneType[] types = null;
 			var result = await httpclient.GetAsync(path);
 			if (result.IsSuccessStatusCode)
 			{
-				types = await result.Content.ReadAsAsync<IEnumerable<PlaneType>>().ConfigureAwait(false);
+				types = await result.Content.ReadAsAsync<PlaneType[]>().ConfigureAwait(false);
 			}
-
 			return types;
 		}
 		public async Task<HttpStatusCode> CreatePlaneTypeAsync(PlaneType type)
