@@ -43,8 +43,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid     Grid.Row="1"
-              Grid.ColumnSpan="2">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -68,7 +67,7 @@
                   ItemClick="OnItemClick"
                   Grid.Column="0"
                   Grid.Row="1"
-                  Background="MintCream"
+                  Background="Navy"
                   >
             <ListViewItem>
                 <TextBlock Text="{x:Bind ViewModel.Types.Count}"></TextBlock>
@@ -111,10 +110,11 @@
                 <TransitionCollection/>
             </ContentPresenter.ContentTransitions>
         </ContentPresenter>
-        <StackPanel Grid.Column="2"
+        <StackPanel x:Name="FormContainer"
+                    Grid.Column="2"
                     Grid.Row="0"
                     Grid.RowSpan="2"
-                    Background="MintCream"
+                    Background="Navy"
                     DataContext="{x:Bind ViewModel.Type, Mode=TwoWay}">
             <TextBlock Style="{ThemeResource TitleTextBlockStyle}"
                                    Margin="0,8"       
