@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using AirportUWPApp.Models;
+using Newtonsoft.Json;
 
 namespace AirportUWPApp.Services
 {
@@ -42,8 +43,10 @@ namespace AirportUWPApp.Services
 			var result = await httpclient.GetAsync(path);
 			if (result.IsSuccessStatusCode)
 			{
-				flights = await result.Content.ReadAsAsync<IEnumerable<Flight>>().ConfigureAwait(false);
-			}
+				//flights = await result.Content.ReadAsAsync<IEnumerable<Flight>>().ConfigureAwait(false);
+                var objectstr = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                flights = JsonConvert.DeserializeObject<IEnumerable<Flight>>(objectstr);
+            }
 
 			return flights;
 		}
