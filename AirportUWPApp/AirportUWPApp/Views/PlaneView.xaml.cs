@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirportUWPApp.Models;
+using AirportUWPApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +27,66 @@ namespace AirportUWPApp.Views
 		public PlaneView()
 		{
 			this.InitializeComponent();
-		}
-	}
+            ViewModel = new PlaneVM();
+            ListContainer.ItemsSource = ViewModel.Planes;
+            this.Loaded += OnLoaded;
+        }
+        public PlaneVM ViewModel { get; set; }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+        }
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListContainer.SelectedItems.Count == 1)
+            {
+                ViewModel.SelectedPlane = ListContainer.SelectedItem as Plane;
+            }
+            DetailContainer.Visibility = Visibility.Visible;
+            FormContainer.Visibility = Visibility.Visible;
+        }
+        private void OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            ViewModel.SelectedPlane = e.ClickedItem as Plane;
+        }
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int i,at,st;
+            TimeSpan ol;
+            TimeSpan.TryParse(POperationLife.Text,out ol);
+            Int32.TryParse(PTypeId.Text, out i);
+            Int32.TryParse(PTypeLift.Text, out at);
+            Int32.TryParse(PTypeSeats.Text, out st);
+            Plane newItem = new Plane() { Id = ViewModel.SelectedPlane.Id, Name = PName.Text, ReleaseDate = PReleaseDate.Date.Date, OperationLife = ol, TypeOfPlane = new PlaneType { Id = i, AirLift = at, Seats = st, Model = PTypeModel.Text } };
+            await ViewModel.Update(newItem);
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+            ViewModel.ListInit();
+        }
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            int i, at, st;
+            TimeSpan ol;
+            TimeSpan.TryParse(POperationLife.Text, out ol);
+            Int32.TryParse(PTypeId.Text, out i);
+            Int32.TryParse(PTypeLift.Text, out at);
+            Int32.TryParse(PTypeSeats.Text, out st);
+            Plane newItem = new Plane() { Name = PName.Text, ReleaseDate = PReleaseDate.Date.Date, OperationLife = ol, TypeOfPlane = new PlaneType { Id = i, AirLift = at, Seats = st, Model = PTypeModel.Text } };
+            await ViewModel.Update(newItem);
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+            ViewModel.ListInit();
+        }
+
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.Delete(ViewModel.SelectedPlane.Id);
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+            ViewModel.ListInit();
+        }
+    }
 }
