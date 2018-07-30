@@ -66,10 +66,11 @@ namespace AirportUWPApp.Views
         {
             TimeSpan i;
             TimeSpan.TryParse(SExperience.Text, out i);
-            Pilot newItem = new Pilot() { Id = ViewModel.SelectedPilot.Id, Name = SName.Text, Surname = SSurname.Text, BirthDate = SBirthDate.Date.Date, Experience = i };
+            Pilot newItem = new Pilot() { Name = SName.Text, Surname = SSurname.Text, BirthDate = SBirthDate.Date.Date, Experience = i };
             await ViewModel.AddNew(newItem);
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
+            
             ViewModel.ListInit();
         }
 

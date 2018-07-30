@@ -1,15 +1,11 @@
 ﻿using AirportUWPApp.Models;
 using AirportUWPApp.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AirportUWPApp.ViewModels
 {
-	public class StewardessVM: BaseVM
+    public class StewardessVM: BaseVM
 	{
         private readonly StewardessService service;
 
@@ -25,6 +21,7 @@ namespace AirportUWPApp.ViewModels
 
         public async void ListInit()
         {
+            Stewardesses.Clear();
             var collection = await service.GetStewardessesAsync();
             foreach (var item in collection)
             {
