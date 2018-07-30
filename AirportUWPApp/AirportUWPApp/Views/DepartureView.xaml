@@ -5,10 +5,170 @@
     xmlns:local="using:AirportUWPApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:AirportUWPApp.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListContainer"
+                  Grid.Column="0"
+                  Grid.Row="0"
+                  Grid.RowSpan="3"
+                  SelectionChanged="OnSelectionChanged"
+                  IsItemClickEnabled="True"
+                  ItemClick="OnItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Departure">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="0"
+                           Text="{x:Bind Id}" 
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="12,6,0,0"/>
+                        <TextBlock  Grid.Column="0"
+                            Grid.Row="1"
+                            Text="{x:Bind DepartureDate}" 
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Margin="12,0,0,6"/>
+                        
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ContentPresenter x:Name="DetailContainer"
+                          BorderThickness="1,0,1,0"
+                          BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                          Padding="20 10 20 10"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Content="{x:Bind ListContainer.SelectedItem, Mode=OneWay}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate x:DataType="models:Departure">
+                    <StackPanel>
+                        <TextBlock Text="Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind Id}"/>
+                        <TextBlock Text="Flight Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind FlightId}"/>
+                        <TextBlock Text="Departure Date: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind  DepartureDate}"/>
+                        <TextBlock Text="Crew: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="Crew Id: "/>
+                        <TextBlock Text="{x:Bind CrewItem.Id}"/>
+                        <TextBlock Text="Flight Id: "/>
+                        <TextBlock Text="{x:Bind CrewItem.PilotId}"/>
+                        <ListView ItemsSource="{x:Bind CrewItem.Stewardesses}">
+                            <DataTemplate x:DataType="models:Stewardess">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="0"
+                                        Text="Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="1"
+                                        Text="{x:Bind Id}"/>
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="0"
+                                        Text="Name: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                        Text="{x:Bind Name}"/>
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="0"
+                                        Text="Surname: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="1"
+                                        Text="{x:Bind Surname}"/>
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="0"
+                                        Text="BirthDate: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="1"
+                                        Text="{x:Bind BirthDate}"/>
+                                    <TextBlock Grid.Row="4"
+                                               Grid.Column="0"
+                                        Text="Crew Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="4"
+                                               Grid.Column="1"
+                                        Text="{x:Bind CrewId}"/>
+                                </Grid>
+
+
+                            </DataTemplate>
+                        </ListView>
+                        <TextBlock Text="Plane: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <StackPanel>
+                                <TextBlock Text="Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{x:Bind PlaneItem.Id}"/>
+                                <TextBlock Text="Name: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{x:Bind PlaneItem.Name}"/>
+                                <TextBlock Text="ReleaseDate: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{x:Bind  PlaneItem.ReleaseDate}"/>
+                                <TextBlock Text="Operational Life: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{x:Bind PlaneItem.OperationLife}"/>
+                                <TextBlock Text="Type: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="Id: "/>
+                            <TextBlock Text="{x:Bind PlaneItem.TypeOfPlane.Id}"/>
+                                <TextBlock Text="Model: "/>
+                            <TextBlock Text="{x:Bind PlaneItem.TypeOfPlane.Model}"/>
+                                <TextBlock Text="Seats: "/>
+                            <TextBlock Text="{x:Bind PlaneItem.TypeOfPlane.Seats}"/>
+                                <TextBlock Text="AirLift: "/>
+                            <TextBlock Text="{x:Bind PlaneItem.TypeOfPlane.AirLift}"/>
+                            </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+
+        </ContentPresenter>
+        <StackPanel x:Name="FormContainer"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Padding="20 10 20 10"
+                    DataContext="{x:Bind ViewModel.SelectedDeparture, Mode=TwoWay}">
+            <TextBlock Text="Change Departure" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBox x:Name="DId" DataContext="{x:Bind ViewModel.SelectedDeparture.Id}" Header="Id" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Number" />
+            <TextBox x:Name="FlightId" DataContext="{x:Bind ViewModel.SelectedDeparture.FlightId}" Header= "Flight Id" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="NameOrPhoneNumber"/>
+            <DatePicker x:Name="DepDate" DataContext="{x:Bind ViewModel.SelectedDeparture.DepartureDate}" Header= "Departure Date" Margin="0,24,0,0" Width="400" HorizontalAlignment="Left" />
+            <TextBox x:Name="CrewId" DataContext="{x:Bind ViewModel.SelectedDeparture.CrewItem.Id}" Header="Crew Id" Margin="0,24,0,0" Width="400" HorizontalAlignment="Left" />
+            <TextBox x:Name="PlaneId" DataContext="{x:Bind ViewModel.SelectedDeparture.PlaneItem.Id}"  Header="Plane Id" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Number" />
+            <StackPanel Orientation="Horizontal">
+
+                <Button Content="Update" Margin="0,24" Click="Button_Click"/>
+                <Button Content="Add New" Margin="24" Click="Button_Click_1"/>
+                <Button Content="Delete" Margin="24" Click="Button_Click_2"/>
+
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
