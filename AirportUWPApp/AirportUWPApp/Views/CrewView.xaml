@@ -1,14 +1,141 @@
 ﻿<Page
     x:Class="AirportUWPApp.Views.CrewView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:AirportUWPApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:AirportUWPApp.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListContainer"
+                  Grid.Column="0"
+                  Grid.Row="0"
+                  Grid.RowSpan="3"
+                  SelectionChanged="OnSelectionChanged"
+                  IsItemClickEnabled="True"
+                  ItemClick="OnItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Crew">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="0"
+                           Text="{x:Bind Id}" 
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="12,6,0,0"/>
+                        <TextBlock  Grid.Column="0"
+                            Grid.Row="1"
+                            Text="{x:Bind PilotId}" 
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Margin="12,0,0,6"/>
+                        
+
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ContentPresenter x:Name="DetailContainer"
+                          BorderThickness="1,0,1,0"
+                          BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                          Padding="20 10 20 10"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Content="{x:Bind ListContainer.SelectedItem, Mode=OneWay}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate x:DataType="models:Crew">
+                    <StackPanel>
+                        <TextBlock Text="Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind Id}"/>
+                        <TextBlock Text="Pilot Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind PilotId}"/>
+             
+                        <ListView ItemsSource="{x:Bind Stewardesses}">
+                            <DataTemplate x:DataType="models:Stewardess">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Row="0" Grid.Column="0"
+                                        Text="Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1"
+                                               Text="{x:Bind Id}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0"
+                                        Text="Name: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1"
+                                        Text="{x:Bind Name}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0"
+                                        Text="Surname: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1"
+                                        Text="{x:Bind Surname}"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="0"
+                                        Text="Birthdate: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1"
+                                        Text="{x:Bind BirthDate}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="0"
+                                        Text="CrewId: " Style="{StaticResource TitleTextBlockStyle}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1"
+                                        Text="{x:Bind CrewId}"/>
+                                </Grid>
+
+
+                            </DataTemplate>
+                        </ListView>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+
+        </ContentPresenter>
+        <StackPanel x:Name="FormContainer"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Padding="20 10 20 10"
+                    DataContext="{x:Bind ViewModel.SelectedCrew, Mode=TwoWay}">
+            <TextBlock Text="Change Crew" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBox x:Name="CId" DataContext="{x:Bind ViewModel.SelectedCrew.Id}" Header="Id" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Number" />
+            <TextBox x:Name="PilotId" DataContext="{x:Bind ViewModel.SelectedCrew.PilotId}" Header= "Departure Point" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="NameOrPhoneNumber"/>
+            <TextBlock Text="Change Stewardess"/>
+            <TextBox x:Name="SId" Header="Id" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Number" />
+            <TextBox x:Name="SName"  Header= "Name" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+            <TextBox x:Name="SSurname"  Header= "Surname" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+            <DatePicker x:Name="SBirthDate"  Header="BirthDate" Margin="0,24,0,0" Width="400" HorizontalAlignment="Left" />
+            <StackPanel Orientation="Horizontal">
+
+                <Button Content="Update" Margin="0,24" Click="Button_Click"/>
+                <Button Content="Add New" Margin="24" Click="Button_Click_1"/>
+                <Button Content="Delete" Margin="24" Click="Button_Click_2"/>
+
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
