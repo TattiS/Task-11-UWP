@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AirportUWPApp.Models;
+﻿using AirportUWPApp.Models;
 using AirportUWPApp.Services;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace AirportUWPApp.ViewModels
 {
-	public class CrewVM: BaseVM
+    public class CrewVM: BaseVM
 	{
 		private readonly CrewService service;
 
@@ -25,6 +21,7 @@ namespace AirportUWPApp.ViewModels
 
         public async void ListInit()
         {
+            Crews.Clear();
             var collection = await service.GetCrewsAsync();
             foreach (var item in collection)
             {

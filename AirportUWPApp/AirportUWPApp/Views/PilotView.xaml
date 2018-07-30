@@ -91,7 +91,7 @@
                     Grid.RowSpan="3"
                     Padding="20 10 20 10"
                     DataContext="{x:Bind ViewModel.SelectedPilot, Mode=TwoWay}">
-            <TextBlock Text="New Stewardess" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="Change Pilot" Style="{StaticResource TitleTextBlockStyle}"/>
             <TextBox x:Name="SId" DataContext="{x:Bind ViewModel.SelectedPilot.Id}" Header="Id" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Number" />
             <TextBox x:Name="SName" DataContext="{x:Bind ViewModel.SelectedPilot.Name}" Header= "Name" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
             <TextBox x:Name="SSurname" DataContext="{x:Bind ViewModel.SelectedPilot.Surname}" Header= "Surname" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
