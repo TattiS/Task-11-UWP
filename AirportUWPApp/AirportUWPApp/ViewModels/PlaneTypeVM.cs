@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AirportUWPApp.Models;
 using AirportUWPApp.Services;
@@ -12,7 +8,6 @@ namespace AirportUWPApp.ViewModels
 	public class PlaneTypeVM:BaseVM
 	{
 		private readonly PlaneTypeService service;
-		public ObservableCollection<PlaneType> Types;
 		
 		public PlaneTypeVM()
 		{
@@ -21,7 +16,9 @@ namespace AirportUWPApp.ViewModels
 			ListInit();
 		}
 		public PlaneType Type { get; set; }
-		
+
+		public ObservableCollection<PlaneType> Types { get; private set; }
+
 		public async void ListInit()
 		{
 			var collection = await service.GetPlaneTypesAsync();

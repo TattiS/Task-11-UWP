@@ -31,12 +31,18 @@ namespace AirportUWPApp.Views
 
 		private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			//if (MasterListView.SelectedItems.Count == 1)
-			//	{
-			//		selectedItem = MasterListView.SelectedItem as PlaneType;
-			//	    EnableContentTransitions();
-			//}
-				
+			if (MasterListView.SelectedItems.Count == 1)
+			{
+				selectedItem = MasterListView.SelectedItem as PlaneType;
+
+				EnableContentTransitions();
+			}
+			else
+			{
+				DetailContentPresenter.Visibility = Visibility.Collapsed;
+				FormContainer.Visibility = Visibility.Collapsed;
+			}
+
 		}
 		private void OnItemClick(object sender, ItemClickEventArgs e)
 		{
