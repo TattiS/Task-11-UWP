@@ -5,21 +5,101 @@
     xmlns:local="using:AirportUWPApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="CadetBlue">
+    xmlns:models="using:AirportUWPApp.Models"
+    mc:Ignorable="d">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="MasterColumn" Width="320"  />
-            <ColumnDefinition x:Name="DetailColumn" Width="*" />
-            <ColumnDefinition x:Name="FormColumn" Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListView Background="DarkViolet"
-                  DataContext="{x:Bind ViewModel.Tickets}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListContainer"
+                  Grid.Column="0"
+                  Grid.Row="0"
+                  Grid.RowSpan="3"
+                  SelectionChanged="OnSelectionChanged"
+                  IsItemClickEnabled="True"
+                  ItemClick="OnItemClick">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Ticket">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse x:Name="Ellipse"
+                         Grid.RowSpan="2"
+                         Width ="12"
+                         Height="12"
+                         Margin="6"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Fill="LightGray"/>
+                        <TextBlock Grid.Column="1"
+                           Text="{x:Bind Id}" 
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="12,6,0,0"/>
+                        <TextBlock  Grid.Column="1"
+                            Grid.Row="1"
+                            Text="{x:Bind Price}" 
+                            Style="{ThemeResource BodyTextBlockStyle}"
+                            Margin="12,0,0,6"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
+        <ContentPresenter x:Name="DetailContainer"
+                          BorderThickness="1,0,1,0"
+                          BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                          Padding="20 10 20 10"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Content="{x:Bind ListContainer.SelectedItem, Mode=OneWay}">
+            <ContentPresenter.ContentTemplate>
+                <DataTemplate x:DataType="models:Ticket">
+                    <StackPanel>
+                        <TextBlock Text="Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind Id}"/>
+                        <TextBlock Text="Price: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind Price}"/>
+                        <TextBlock Text="Flight Id: " Style="{StaticResource TitleTextBlockStyle}"/>
+                        <TextBlock Text="{x:Bind FlightId}"/>
+                        
+                    </StackPanel>
+                </DataTemplate>
+            </ContentPresenter.ContentTemplate>
+
+        </ContentPresenter>
+        <StackPanel x:Name="FormContainer"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Padding="20 10 20 10"
+                    DataContext="{x:Bind ViewModel.SelectedTicket, Mode=TwoWay}">
+            <TextBlock Text="Change Ticket" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBox x:Name="TId" DataContext="{x:Bind ViewModel.SelectedTicket.Id}" Header="Id" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Number" />
+            <TextBox x:Name="TPrice" DataContext="{x:Bind ViewModel.SelectedTicket.Price}" Header= "Price" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="Number"/>
+            <TextBox x:Name="TFlight" DataContext="{x:Bind ViewModel.SelectedTicket.FlightId}" Header= "Flight Id" Margin="0,24,0,0" MaxLength="32" Width="400" HorizontalAlignment="Left" InputScope="Number"/>
+            
+            <StackPanel Orientation="Horizontal">
+
+                <Button Content="Update" Margin="0,24" Click="Button_Click"/>
+                <Button Content="Add New" Margin="24" Click="Button_Click_1"/>
+                <Button Content="Delete" Margin="24" Click="Button_Click_2"/>
+
+            </StackPanel>
+        </StackPanel>
+
     </Grid>
 </Page>

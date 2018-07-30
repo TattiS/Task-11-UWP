@@ -32,23 +32,23 @@ namespace AirportUWPApp
 
 		private void GoToPilots_Click(object sender, RoutedEventArgs e)
 		{
-			MainFrame.Navigate(typeof(PilotVM));
+			MainFrame.Navigate(typeof(PilotView));
 			
 		}
 
 		private void GoToDepartures_Click(object sender, RoutedEventArgs e)
 		{
-			MainFrame.Navigate(typeof(DepartureVM));
+			MainFrame.Navigate(typeof(DepartureView));
 		}
 
 		private void GoToTickets_Click(object sender, RoutedEventArgs e)
 		{
-			MainFrame.Navigate(typeof(TicketVM));
+			MainFrame.Navigate(typeof(TicketView));
 		}
 
 		private void GoToFlights_Click(object sender, RoutedEventArgs e)
 		{
-			MainFrame.Navigate(typeof(FlightVM));
+			MainFrame.Navigate(typeof(FlightView));
 		}
 
 		private void GoToTypes_Click(object sender, RoutedEventArgs e)
@@ -58,17 +58,17 @@ namespace AirportUWPApp
 
 		private void GoToPlanes_Click(object sender, RoutedEventArgs e)
 		{
-			MainFrame.Navigate(typeof(PlaneVM));
+			MainFrame.Navigate(typeof(PlaneView));
 		}
 
 		private void GoToCrews_Click(object sender, RoutedEventArgs e)
 		{
-			MainFrame.Navigate(typeof(CrewVM));
+			MainFrame.Navigate(typeof(CrewView));
 		}
 
 		private void GoToStewardesses_Click(object sender, RoutedEventArgs e)
 		{
-			MainFrame.Navigate(typeof(StewardessVM));
+			MainFrame.Navigate(typeof(StewardessView));
 		}
 		
 	}
