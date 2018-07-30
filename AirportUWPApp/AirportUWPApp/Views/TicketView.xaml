@@ -94,7 +94,7 @@
             
             <StackPanel Orientation="Horizontal">
 
-                <Button Content="Update" Margin="0,24" Click="Button_Click"/>
+                <Button Content="Update" Margin="24" Click="Button_Click"/>
                 <Button Content="Add New" Margin="24" Click="Button_Click_1"/>
                 <Button Content="Delete" Margin="24" Click="Button_Click_2"/>
 

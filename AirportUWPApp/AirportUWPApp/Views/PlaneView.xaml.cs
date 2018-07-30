@@ -75,7 +75,7 @@ namespace AirportUWPApp.Views
             Int32.TryParse(PTypeLift.Text, out at);
             Int32.TryParse(PTypeSeats.Text, out st);
             Plane newItem = new Plane() { Name = PName.Text, ReleaseDate = PReleaseDate.Date.Date, OperationLife = ol, TypeOfPlane = new PlaneType { Id = i, AirLift = at, Seats = st, Model = PTypeModel.Text } };
-            await ViewModel.Update(newItem);
+            await ViewModel.AddNew(newItem);
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
             ViewModel.ListInit();

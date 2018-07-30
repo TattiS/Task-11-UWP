@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using AirportUWPApp.Models;
@@ -23,73 +24,61 @@ namespace AirportUWPApp.Views
 		{
 			this.InitializeComponent();
 			ViewModel = new PlaneTypeVM();
-			MasterListView.DataContext = ViewModel.Types;
-			
-		}
+            ListContainer.ItemsSource = ViewModel.Types;
+            this.Loaded += OnLoaded;
+
+        }
 		public PlaneTypeVM ViewModel { get; set; }
-		
 
-		private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			if (MasterListView.SelectedItems.Count == 1)
-			{
-				selectedItem = MasterListView.SelectedItem as PlaneType;
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+        }
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ListContainer.SelectedItems.Count == 1)
+            {
+                ViewModel.Type = ListContainer.SelectedItem as PlaneType;
+            }
+            DetailContainer.Visibility = Visibility.Visible;
+            FormContainer.Visibility = Visibility.Visible;
+        }
+        private void OnItemClick(object sender, ItemClickEventArgs e)
+        {
+            ViewModel.Type = e.ClickedItem as PlaneType;
+        }
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            int s,a;
+            Int32.TryParse(TSeats.Text, out s);
+            Int32.TryParse(TAirLift.Text, out a);
+            PlaneType newItem = new PlaneType() { Id = ViewModel.Type.Id, Model = TModel.Text, Seats=s, AirLift = a };
+            await ViewModel.Update(newItem);
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+            ViewModel.ListInit();
+        }
 
-				EnableContentTransitions();
-			}
-			else
-			{
-				DetailContentPresenter.Visibility = Visibility.Collapsed;
-				FormContainer.Visibility = Visibility.Collapsed;
-			}
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            int s, a;
+            Int32.TryParse(TSeats.Text, out s);
+            Int32.TryParse(TAirLift.Text, out a);
+            PlaneType newItem = new PlaneType() { Id = ViewModel.Type.Id, Model = TModel.Text, Seats = s, AirLift = a };
+            await ViewModel.AddNew(newItem);
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+            ViewModel.ListInit();
+        }
 
-		}
-		private void OnItemClick(object sender, ItemClickEventArgs e)
-		{
-			
-			selectedItem = e.ClickedItem as PlaneType;
-			EnableContentTransitions();
-			
-		}
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.Delete(ViewModel.Type.Id);
+            DetailContainer.Visibility = Visibility.Collapsed;
+            FormContainer.Visibility = Visibility.Collapsed;
+            ViewModel.ListInit();
+        }
 
-		private void EnableContentTransitions()
-		{
-			DetailContentPresenter.ContentTransitions.Clear();
-			DetailContentPresenter.ContentTransitions.Add(new EntranceThemeTransition());
-		}
-
-		private void AddItem(object sender, RoutedEventArgs e)
-		{
-
-			
-			EnableContentTransitions();
-
-		}
-
-		private void UpdateItem(object sender, RoutedEventArgs e)
-		{
-
-
-			EnableContentTransitions();
-
-		}
-
-		private async void DeleteItem(object sender, RoutedEventArgs e)
-		{
-			int id = -1;
-			var item = MasterListView.SelectedItem as PlaneType;
-			 int.TryParse(item?.Id.ToString(), out id);
-			await ViewModel.Delete(id);
-			EnableContentTransitions();
-
-		}
-
-		private void CancelSelection(object sender, RoutedEventArgs e)
-		{
-
-
-			EnableContentTransitions();
-
-		}
-	}
+    }
 }
