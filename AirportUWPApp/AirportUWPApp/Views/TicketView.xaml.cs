@@ -61,9 +61,10 @@ namespace AirportUWPApp.Views
             double.TryParse(TPrice.Text, out p);
             Ticket newItem = new Ticket() { Id = ViewModel.SelectedTicket.Id, Price = p, FlightId = i };
             await ViewModel.Update(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
@@ -74,17 +75,19 @@ namespace AirportUWPApp.Views
             double.TryParse(TPrice.Text, out p);
             Ticket newItem = new Ticket() { Id = ViewModel.SelectedTicket.Id, Price = p, FlightId = i };
             await ViewModel.AddNew(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             await ViewModel.Delete(ViewModel.SelectedTicket.Id);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
     }
 }

@@ -16,13 +16,17 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0"
+                   Grid.Row="0"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource TitleTextBlockStyle}">Planes:</TextBlock>
         <ListView x:Name="ListContainer"
                   Grid.Column="0"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   Grid.RowSpan="3"
                   SelectionChanged="OnSelectionChanged"
                   IsItemClickEnabled="True"
@@ -119,7 +123,7 @@
             <TextBox x:Name="PName" DataContext="{x:Bind ViewModel.SelectedPlane.Name}" Header= "Name" Grid.Row="2" Margin="0,12,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="NameOrPhoneNumber"/>
             <DatePicker x:Name="PReleaseDate" DataContext="{x:Bind ViewModel.SelectedPlane.ReleaseDate}" Header= "Release Date" Grid.Row="3" Margin="0,12,0,0" HorizontalAlignment="Left" />
             <TextBox x:Name="POperationLife" DataContext="{x:Bind ViewModel.SelectedPlane.OperationLife}" Header="Operation Life" Grid.Row="4" Margin="0,12,0,0" Width="400" HorizontalAlignment="Left" />
-            <TextBlock Text="Change Plane" Grid.Row="5" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="Change Type" Grid.Row="5" Style="{StaticResource TitleTextBlockStyle}"/>
             <TextBox x:Name="PTypeId" DataContext="{x:Bind ViewModel.SelectedPlane.TypeOfPlane.Id}" Header="Type Id" Grid.Row="6" Margin="0,12,0,0"  HorizontalAlignment="Left" InputScope="Number" />
             <TextBox x:Name="PTypeModel" DataContext="{x:Bind ViewModel.SelectedPlane.TypeOfPlane.Model}" Header="Type Model" Grid.Row="7" Margin="0,12,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="NameOrPhoneNumber" />
             <TextBox x:Name="PTypeSeats" DataContext="{x:Bind ViewModel.SelectedPlane.TypeOfPlane.Seats}" Header="Type Seats" Grid.Row="8" Margin="0,12,0,0" HorizontalAlignment="Left" InputScope="Number" />

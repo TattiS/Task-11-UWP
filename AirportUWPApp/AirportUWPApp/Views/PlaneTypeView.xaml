@@ -14,13 +14,19 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0"
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                Style="{StaticResource TitleTextBlockStyle}"> Types:
+        </TextBlock>
         <ListView x:Name="ListContainer"
                   Grid.Column="0"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   Grid.RowSpan="3"
                   SelectionChanged="OnSelectionChanged"
                   IsItemClickEnabled="True"

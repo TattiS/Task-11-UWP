@@ -61,9 +61,10 @@ namespace AirportUWPApp.Views
             Int32.TryParse(PTypeSeats.Text, out st);
             Plane newItem = new Plane() { Id = ViewModel.SelectedPlane.Id, Name = PName.Text, ReleaseDate = PReleaseDate.Date.Date, OperationLife = ol, TypeOfPlane = new PlaneType { Id = i, AirLift = at, Seats = st, Model = PTypeModel.Text } };
             await ViewModel.Update(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
@@ -76,17 +77,17 @@ namespace AirportUWPApp.Views
             Int32.TryParse(PTypeSeats.Text, out st);
             Plane newItem = new Plane() { Name = PName.Text, ReleaseDate = PReleaseDate.Date.Date, OperationLife = ol, TypeOfPlane = new PlaneType { Id = i, AirLift = at, Seats = st, Model = PTypeModel.Text } };
             await ViewModel.AddNew(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             await ViewModel.Delete(ViewModel.SelectedPlane.Id);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
         }
     }
 }

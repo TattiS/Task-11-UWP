@@ -46,9 +46,10 @@ namespace AirportUWPApp.Views
             Int32.TryParse(PilotId.Text, out int p);
             Crew newItem = new Crew() { Id = ViewModel.SelectedCrew.Id, PilotId = p, Stewardesses = new List<Stewardess> { new Stewardess { Name = SName.Text, Surname = SSurname.Text, BirthDate = SBirthDate.Date.Date, CrewId = ViewModel.SelectedCrew.Id } } };
             await ViewModel.Update(newItem);
+            
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
@@ -56,17 +57,19 @@ namespace AirportUWPApp.Views
             Int32.TryParse(PilotId.Text, out int p);
             Crew newItem = new Crew() { PilotId = p, Stewardesses = new List<Stewardess> { new Stewardess { Name = SName.Text, Surname = SSurname.Text, BirthDate = SBirthDate.Date.Date, CrewId = ViewModel.SelectedCrew.Id } } };
             await ViewModel.AddNew(newItem);
+            
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             await ViewModel.Delete(ViewModel.SelectedCrew.Id);
+            
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
         }
     }
 }

@@ -16,13 +16,18 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0"
+                   Grid.Row="0"
+                   Height="60px" 
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource TitleTextBlockStyle}">Departures:</TextBlock>
         <ListView x:Name="ListContainer"
                   Grid.Column="0"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   Grid.RowSpan="3"
                   SelectionChanged="OnSelectionChanged"
                   IsItemClickEnabled="True"
@@ -55,6 +60,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <ScrollViewer Grid.Column="1"
+                    Grid.Row="0"
+                    Grid.RowSpan="3">
         <ContentPresenter x:Name="DetailContainer"
                           BorderThickness="1,0,1,0"
                           BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
@@ -150,6 +158,10 @@
             </ContentPresenter.ContentTemplate>
 
         </ContentPresenter>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.RowSpan="3">
         <StackPanel x:Name="FormContainer"
                     Grid.Column="2"
                     Grid.Row="0"
@@ -170,5 +182,6 @@
 
             </StackPanel>
         </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

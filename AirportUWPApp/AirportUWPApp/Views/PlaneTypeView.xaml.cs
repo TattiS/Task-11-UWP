@@ -19,7 +19,7 @@ namespace AirportUWPApp.Views
 	public sealed partial class PlaneTypeView : Page
 	{
 		
-		private PlaneType selectedItem;
+		//private PlaneType selectedItem;
 		public PlaneTypeView()
 		{
 			this.InitializeComponent();
@@ -55,9 +55,10 @@ namespace AirportUWPApp.Views
             Int32.TryParse(TAirLift.Text, out a);
             PlaneType newItem = new PlaneType() { Id = ViewModel.Type.Id, Model = TModel.Text, Seats=s, AirLift = a };
             await ViewModel.Update(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
@@ -67,17 +68,19 @@ namespace AirportUWPApp.Views
             Int32.TryParse(TAirLift.Text, out a);
             PlaneType newItem = new PlaneType() { Id = ViewModel.Type.Id, Model = TModel.Text, Seats = s, AirLift = a };
             await ViewModel.AddNew(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             await ViewModel.Delete(ViewModel.Type.Id);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
 
     }

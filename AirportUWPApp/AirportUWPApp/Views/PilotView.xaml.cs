@@ -68,18 +68,18 @@ namespace AirportUWPApp.Views
             TimeSpan.TryParse(SExperience.Text, out i);
             Pilot newItem = new Pilot() { Name = SName.Text, Surname = SSurname.Text, BirthDate = SBirthDate.Date.Date, Experience = i };
             await ViewModel.AddNew(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            
-            ViewModel.ListInit();
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             await ViewModel.Delete(ViewModel.SelectedPilot.Id);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+
         }
     }
 }

@@ -57,9 +57,10 @@ namespace AirportUWPApp.Views
                 PlaneItem = new Plane { Id = p }
             };
             await ViewModel.Update(newItem);
+            
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
@@ -78,17 +79,19 @@ namespace AirportUWPApp.Views
                 PlaneItem = new Plane { Id = p }
             };
             await ViewModel.AddNew(newItem);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
             await ViewModel.Delete(ViewModel.SelectedDeparture.Id);
+            ViewModel.ListInit();
             DetailContainer.Visibility = Visibility.Collapsed;
             FormContainer.Visibility = Visibility.Collapsed;
-            ViewModel.ListInit();
+            
         }
     }
 }
