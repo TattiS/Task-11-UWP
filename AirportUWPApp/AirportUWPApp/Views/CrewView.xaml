@@ -115,7 +115,44 @@
             </ContentPresenter.ContentTemplate>
 
         </ContentPresenter>
-        <StackPanel x:Name="FormContainer"
+        <ScrollViewer Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.RowSpan="3">
+        <Grid x:Name="FormContainer"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    Grid.RowSpan="3"
+                    Padding="20 10 20 10"
+                    DataContext="{x:Bind ViewModel.SelectedCrew, Mode=TwoWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Change Crew" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBox Grid.Row="1" x:Name="CId" DataContext="{x:Bind ViewModel.SelectedCrew.Id}" Header="Id" Margin="0,12,0,0" HorizontalAlignment="Left" InputScope="Number" />
+            <TextBox Grid.Row="2" x:Name="PilotId" DataContext="{x:Bind ViewModel.SelectedCrew.PilotId}" Header= "Pilot Id" Margin="0,12,0,0" HorizontalAlignment="Left" InputScope="NameOrPhoneNumber"/>
+            <TextBlock Grid.Row="3" Text="Change Stewardess" Margin="0,12,0,0" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBox Grid.Row="4" x:Name="SId" Header="Id" Margin="0,12,0,0" HorizontalAlignment="Left" InputScope="Number" />
+            <TextBox Grid.Row="5" x:Name="SName"  Header= "Name" Margin="0,12,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+            <TextBox Grid.Row="6" x:Name="SSurname"  Header= "Surname" Margin="0,12,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+            <DatePicker Grid.Row="7" x:Name="SBirthDate"  Header="BirthDate" Margin="0,12,0,0" HorizontalAlignment="Left" />
+            <StackPanel Grid.Row="8" Orientation="Horizontal">
+
+                <Button Content="Update" Margin="24" Click="Button_Click"/>
+                <Button Content="Add New" Margin="24" Click="Button_Click_1"/>
+                <Button Content="Delete" Margin="24" Click="Button_Click_2"/>
+
+            </StackPanel>
+        </Grid>
+        </ScrollViewer>
+        <!--<StackPanel x:Name="FormContainer1"
                     Grid.Column="2"
                     Grid.Row="0"
                     Grid.RowSpan="3"
@@ -136,7 +173,7 @@
                 <Button Content="Delete" Margin="24" Click="Button_Click_2"/>
 
             </StackPanel>
-        </StackPanel>
+        </StackPanel>-->
            
     </Grid>
 </Page>

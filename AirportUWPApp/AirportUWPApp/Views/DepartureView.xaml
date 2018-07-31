@@ -164,7 +164,7 @@
             <TextBox x:Name="PlaneId" DataContext="{x:Bind ViewModel.SelectedDeparture.PlaneItem.Id}"  Header="Plane Id" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Number" />
             <StackPanel Orientation="Horizontal">
 
-                <Button Content="Update" Margin="0,24" Click="Button_Click"/>
+                <Button Content="Update" Margin="24" Click="Button_Click"/>
                 <Button Content="Add New" Margin="24" Click="Button_Click_1"/>
                 <Button Content="Delete" Margin="24" Click="Button_Click_2"/>
 
