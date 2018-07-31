@@ -1,5 +1,6 @@
 ﻿using AirportUWPApp.Models;
 using AirportUWPApp.Services;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace AirportUWPApp.ViewModels
         public ObservableCollection<Crew> Crews { get; private set; }
         public Crew SelectedCrew { get; set; }
 
-        public async void ListInit()
+        public async void ListInit_Void()
         {
             Crews.Clear();
             var collection = await service.GetCrewsAsync();
@@ -28,6 +29,17 @@ namespace AirportUWPApp.ViewModels
                 Crews.Add(item);
 
             }
+        }
+        public NotifyTaskCompletion<IEnumerable<Crew>> ListInit()
+        {
+            Crews.Clear();
+            var result = new NotifyTaskCompletion<IEnumerable<Crew>>(service.GetCrewsAsync());
+            foreach (var item in result.Result)
+            {
+                Crews.Add(item);
+
+            }
+            return result;
         }
 
         public async Task AddNew(Crew crew)

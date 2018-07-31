@@ -119,6 +119,7 @@
     <Compile Include="ViewModels\CrewVM.cs" />
     <Compile Include="ViewModels\DepartureVM.cs" />
     <Compile Include="ViewModels\FlightVM.cs" />
+    <Compile Include="ViewModels\NotifyTaskCompletion.cs" />
     <Compile Include="ViewModels\PilotVM.cs" />
     <Compile Include="ViewModels\PlaneTypeVM.cs" />
     <Compile Include="ViewModels\PlaneVM.cs" />
