@@ -30,7 +30,13 @@ namespace AirportUWPApp
             this.InitializeComponent();
         }
 
-		private void GoToPilots_Click(object sender, RoutedEventArgs e)
+        private void GoToTest_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(typeof(TestPage));
+
+        }
+
+        private void GoToPilots_Click(object sender, RoutedEventArgs e)
 		{
 			MainFrame.Navigate(typeof(PilotView));
 			
@@ -70,6 +76,5 @@ namespace AirportUWPApp
 		{
 			MainFrame.Navigate(typeof(StewardessView));
 		}
-		
-	}
+    }
 }

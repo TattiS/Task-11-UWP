@@ -31,6 +31,11 @@
                     Grid.ColumnSpan="8"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
+            <HyperlinkButton  Content="Test"
+                HorizontalAlignment="Stretch"
+                Foreground="Orange"
+                Margin="8"
+                Click="GoToTest_Click"/>
             <HyperlinkButton  Content="Pilots"
                 HorizontalAlignment="Stretch"
                 Foreground="White"

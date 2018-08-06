@@ -20,7 +20,7 @@ namespace AirportUWPApp.ViewModels
         public ObservableCollection<Crew> Crews { get; private set; }
         public Crew SelectedCrew { get; set; }
 
-        public async void ListInit_Void()
+        public async void ListInit()
         {
             Crews.Clear();
             var collection = await service.GetCrewsAsync();
@@ -30,18 +30,7 @@ namespace AirportUWPApp.ViewModels
 
             }
         }
-        public NotifyTaskCompletion<IEnumerable<Crew>> ListInit()
-        {
-            Crews.Clear();
-            var result = new NotifyTaskCompletion<IEnumerable<Crew>>(service.GetCrewsAsync());
-            foreach (var item in result.Result)
-            {
-                Crews.Add(item);
-
-            }
-            return result;
-        }
-
+       
         public async Task AddNew(Crew crew)
         {
             if (crew is Crew)
