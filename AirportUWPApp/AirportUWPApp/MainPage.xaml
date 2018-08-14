@@ -10,6 +10,19 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="480"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="mainMenuPanel.Orientation"  Value="Vertical"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -26,7 +39,8 @@
         </Grid.ColumnDefinitions>
         <Rectangle Fill="{ThemeResource AppBarBackgroundThemeBrush}" Grid.Row="0" Grid.ColumnSpan="3"/>
       
-        <StackPanel Grid.Row="0"
+        <StackPanel x:Name="mainMenuPanel"
+                    Grid.Row="0"
                     Grid.Column="0"
                     Grid.ColumnSpan="8"
                     Orientation="Horizontal"
